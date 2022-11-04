@@ -7,6 +7,13 @@ PID Controller class (Proportional-Integral-Derivative Controller)
 (backward Euler discrete form)
 --]]
 
+
+function getOtherValue(value)
+    if value == 0 then return 1 end
+    if value == 1 then return 0 end
+end
+
+
 PID = {} -- the table representing the class, which will double as the metatable for the instances
 PID.__index = PID -- failed table lookups on the instances should fallback to the class table, to get methods
 setmetatable(PID, {

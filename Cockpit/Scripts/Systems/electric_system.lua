@@ -1,4 +1,5 @@
 dofile(LockOn_Options.script_path.."command_defs.lua")
+dofile(LockOn_Options.script_path.."utilites.lua")
 
 local electric_system = GetSelf()
 local dev = electric_system
@@ -10,7 +11,7 @@ local sensor_data = get_base_data()
 
 function post_initialize()  
 
-   value = 1
+   value = 0
    electric_system:AC_Generator_1_on(value > 0)
    electric_system:AC_Generator_2_on(value > 0)
    electric_system:DC_Battery_on(value > 0)
@@ -60,48 +61,30 @@ function post_initialize()
         battery_state = 1
         right_gen_state = 1
         left_gen_state = 1
-        dispatch_action(nil,LeftGen)
-        dispatch_action(nil,RightGen)
-        dispatch_action(nil,PowerOnOff)--power will be on by default so we turn it off so when the click happens to set the switch it turns it back on...
-        electric_system:performClickableAction(battery_click, 1, false)
-        electric_system:performClickableAction(battery_click, 1, false)
-    elseif birth =="GROUND_COLD" then
     end
-	
-
 end
 ------------------------------------------------------------FUNCTION-SETCOMMAND---------------------------------------------------------------------------------------------------
 function SetCommand(command,value)
---BATTERY iCOMMAND
-    if command == PowerOnOff and battery_state == 0 then
-        battery_state = 1
-        --print_message_to_user("BATTERY ON")--spell out what you are testing it makes it eaiser to track whats going on
-    elseif command == PowerOnOff and battery_state == 1 then
-        battery_state = 0
-        --print_message_to_user("BATTERY OFF")
+    if command == PowerOnOff then
+        battery_state = getOtherValue(battery_state)
     end
-    --Battery Click Command
+
     if command == battery_click then
         dispatch_action(nil,PowerOnOff)-- this is used to push a keyboad/icommand with a mouse click
-        --print_message_to_user("BATTERY CLICK")
     end
     
-    if command == LeftGen and left_gen_state == 0 then
-        left_gen_state = 1
-    elseif command == LeftGen and left_gen_state == 1 then
-        left_gen_state = 0
+    if command == LeftGen then
+        left_gen_state = get_otherValue(left_gen_state)
     end
-    --Battery Click Command
+
     if command == lgen_click then
         dispatch_action(nil,LeftGen)-- this is used to push a keyboad/icommand with a mouse click
     end
 
-    if command == RightGen and right_gen_state == 0 then
-        right_gen_state = 1
-    elseif command == RightGen and right_gen_state == 1 then
-        right_gen_state = 0
+    if command == RightGen then
+        right_gen_state = getOtherValue(right_gen_state)
     end
-    --Battery Click Command
+
     if command == rgen_click then
         dispatch_action(nil,RightGen)-- this is used to push a keyboad/icommand with a mouse click
     end
