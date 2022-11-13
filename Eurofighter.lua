@@ -1199,8 +1199,8 @@ pylons_enumeration = {1, 13, 12, 11, 2, 3, 4, 10, 5, 6, 9, 8, 7},
 			[WOLALIGHT_NAVLIGHTS]	= {	
 					typename = "collection", -- nav_lights_default
 					lights = {
-						{typename = "argumentlight", argument = 191, color = {1, 0, 0}, connector = "BANO_1",intensity_max = 10}, -- Left Position(red)
-						{typename = "argumentlight", argument = 191, color = {0, 1, 0}, connector = "BANO_2",intensity_max = 10}, -- Right Position(green)
+						{typename = "argumentlight", argument = 191, color = {1, 0, 0}, connector = "BANO_1",intensity_max = 12}, -- Left Position(red)
+						{typename = "argumentlight", argument = 191, color = {0, 1, 0}, connector = "BANO_2",intensity_max = 12}, -- Right Position(green)
 						{typename = "argumentlight", argument = 192, color = {1, 1, 1}, connector = "BANO_0",intensity_max = 10}, -- Tail Position white)
 
 						{typename = "natostrobelight", argument = 190, period = 1, phase_shift = 0, color = {1, 0, 0}, connector = "BANO_0_UP",intensity_max = 15},
