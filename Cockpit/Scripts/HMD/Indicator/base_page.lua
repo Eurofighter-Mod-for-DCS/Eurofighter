@@ -27,8 +27,8 @@ HMD_base_clip.h_clip_relation   = h_clip_relations.REWRITE_LEVEL
 HMD_base_clip.level             = HMD_DEFAULT_NOCLIP_LEVEL +1
 HMD_base_clip.isdraw            = true
 HMD_base_clip.change_opacity    = true
-HMD_base_clip.element_params    = {"HMD"}
-HMD_base_clip.controllers       = {{"parameter_compare_with_number",0,1}}
+HMD_base_clip.element_params    = {"BATTERY","HEAONOFF"}
+HMD_base_clip.controllers       = {{"parameter_compare_with_number",0,1},{"parameter_compare_with_number",1,1}}
 HMD_base_clip.isvisible         = false
 Add(HMD_base_clip)
 
@@ -50,6 +50,7 @@ HMD_PITCH.isvisible                      = true
 Add(HMD_PITCH)
 
 
+
 local HMD_Cross                    = CreateElement "ceTexPoly"
 HMD_Cross.vertices                 = HMD_vert_gen(4750,4750)
 HMD_Cross.indices                  = {0,1,2,2,3,0}
@@ -65,7 +66,6 @@ HMD_Cross.h_clip_relation          = h_clip_relations.COMPARE
 HMD_Cross.level                    = HMD_DEFAULT_NOCLIP_LEVEL +1
 HMD_Cross.parent_element           = "HMD_PITCH"
 Add(HMD_Cross)
-
 
 local HMD_Circle                    = CreateElement "ceTexPoly"
 HMD_Circle.vertices                 = HMD_vert_gen(4750,4750)
