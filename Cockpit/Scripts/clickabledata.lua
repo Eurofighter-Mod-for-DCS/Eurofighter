@@ -321,7 +321,9 @@ elements["MAW"] 		 		= default_2_position_tumb("MAW On/Off",  devices.UTILITIES,
 elements["INT"] 		 		= default_2_position_tumb("INT On/Off",  devices.UTILITIES, device_commands.INTONOFF, 714)
 elements["XPDR"] 		 		= default_2_position_tumb("XPDR On/Off",  devices.UTILITIES, device_commands.XPDRONOFF, 715)
 elements["FLIR"] 		 		= default_2_position_tumb("FLIR On/Off",  devices.UTILITIES, device_commands.FLIRONOFF, 716)
-elements["HEA"] 		 		= default_2_position_tumb("HEA On/Off",  devices.UTILITIES, device_commands.HEAONOFF, 718)
+-----------------------------------------------------------------------------------------------------------------------------------------
+elements["HEA"] 		 		= default_2_position_tumb("HEA On/Off",  devices.UTILITIES, device_commands.HEA, 718)  --HMD Switch
+-----------------------------------------------------------------------------------------------------------------------------------------
 elements["ECM"] 		 		= default_2_position_tumb("ECK On/Off",  devices.UTILITIES, device_commands.ECKONOFF, 719)
 elements["R_ALT"] 		 		= default_2_position_tumb("R ALT On/Off",  devices.UTILITIES, device_commands.R_ALTONOFF, 720)
 elements["HTA"] 		 		= default_2_position_tumb("FBW On/Off",  devices.FBW_SYSTEM, device_commands.FBWONOFF, 721)
