@@ -558,6 +558,7 @@ device_commands =
 	RADAR_UP			= __counter(),
 	RADAR_DOWN			= __counter(),
 	RECOVER				= __counter(),
+	HEA		        	= __counter(),
 
 	AP					= __counter(),
 	AT					= __counter(),
