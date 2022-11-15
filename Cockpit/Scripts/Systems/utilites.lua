@@ -21,6 +21,7 @@ local parameters =
     nav_state       = get_param_handle("NAV_STATE"),
     LOW_HEIGHT      = get_param_handle("LOW_HEIGHT"),
     PARACHUTE       = get_param_handle("PARACHUTE"),
+    HEAONOFF             =get_param_handle("HEAONOFF"),
 }
 
 local fuel_cover_click = device_commands.FuelProbeCover
@@ -45,7 +46,9 @@ local airtoair_switch = device_commands.AIRTOAIR
 local navmode_switch = device_commands.NAVMODE
 local airtoair_key  = Keys.PlaneModeBVR
 local navmode_key   = Keys.PlaneModeNAV
-
+-- HMD
+local HEA_switch    = device_commands.HEA
+local HEA_state     = 0
 -- LIGHTS
 local landinglight_switch = device_commands.LANDONOFF
 local landinglight_key  = Keys.PlaneHeadLightOnOff
@@ -165,6 +168,9 @@ utilites:listen_command(Keys.PlaneStabHbar)
 utilites:listen_command(Keys.PlaneSAUHorizon)
 utilites:listen_command(iCommandPlaneStabHorizon)
 utilites:listen_command(RECOVER)
+utilites:listen_command(HEA_state)
+utilites:listen_command(HEA_switch)
+utilites:listen_command(HEA_action)
 ------------------------------------------------------------------FUNCTION-POST-INIT---------------------------------------------------------------------------------------------------
 function post_initialize()
     birth = LockOn_Options.init_conditions.birth_place
@@ -268,6 +274,11 @@ function SetCommand(command,value)
     elseif command == FLIROnOff_action and FLIRState == 1 then
         FLIRState = 0 
     end
+    if command == HEA_switch and HEA_state == 0 then 
+        HEA_state = 1 
+    elseif command == HEA_switch and HEA_state == 1 then
+        HEA_state = 0 
+    end
     if command == FlirSwitch then
         dispatch_action(nil,FLIROnOff_action)
     end
@@ -325,7 +336,7 @@ function SetCommand(command,value)
         dispatch_action(nil, 175)
     end
 
-
+    local test = false
     if command == Keys.PlaneModeNAV  then
         navmode = 1
         bvrmode = 0
@@ -420,8 +431,8 @@ function SetCommand(command,value)
         FIOmode = 0
         Groundmode = 0
         Cannonmode = 0
-        navmode = 0
-        ShowFc3Hud()
+        navmode = 1
+        HideFc3Hud()
     end
 
 
@@ -485,13 +496,15 @@ function update()
     -- parameters.RADARPARAM:set(RadarState)
     -- parameters.FLIRPARAM:set(FLIRState)
     parameters.nav_state:set(navmode)
+    parameters.HEAONOFF:set(HEA_state)
+    
 
     time = time + update_time_step
     if time >= 1.25 then
         time = 0
     end
 
-    -- print_message_to_user (hook_state)
+    --print_message_to_user (HEA_state)
 
     if navlight_state == 0 then
         set_aircraft_draw_argument_value(191,1) 
