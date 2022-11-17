@@ -2,6 +2,23 @@ local res = external_profile("Config/Input/Aircrafts/base_joystick_binding.lua")
 ignore_features(res.keyCommands,{
 "dragchute"
 })
+
+local BrakesON      = 10038
+local BrakesOFF     = 10039
+local L_BRAKE       = 10056
+local R_BRAKE       = 10057
+local B_BRAKE       = 10058
+local Brakes        = 10023 
+local P_BRAKE	    = 10059
+local LANDING_MODE  = 10060
+local PITCHBW_AXIS  = 10061
+local ROLLBW_AXIS   = 10062
+local YAWBW_AXIS    = 10063
+local AUTOTHROTTLE  = 10064
+local ATAOA_1214	= 10065
+local THROTTLE_AXIS = 10066
+
+
 join(res.keyCommands,{
 
 -- Autopilot
@@ -100,5 +117,11 @@ join(res.axisCommands,{
 {action = iCommandWheelBrake,		name = _('Wheel Brake')},
 {action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left')},
 {action = iCommandRightWheelBrake,	name = _('Wheel Brake Right')},
+
+{action = PITCHBW_AXIS,		                        	name = _('Pitch Axis')},
+{action = ROLLBW_AXIS,		                        	name = _('Roll Axis')},
+{action = YAWBW_AXIS,		                        	name = _('Rudder Axis')},
+{action = THROTTLE_AXIS,		                        name = _('Throttle Axis')},
+
 })
 return res
