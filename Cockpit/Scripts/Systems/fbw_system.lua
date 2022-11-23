@@ -13,6 +13,8 @@ local ROLL_INPUT = 0
 local PITCH_INPUT = 0
 local RUDDER_INPUT = 0
 local THROTTLE_INPUT = 0
+local PITCH_STATE = get_param_handle("PITCH_INPUT") 
+local ROLL_STATE = get_param_handle("ROLL_INPUT")
 
 local GERROR = 0
 local T = 0
@@ -21,20 +23,9 @@ local ias_knots = 0
 
 local PITCH_TARGET = 0
 local PITCH_ERROR = 0
-local PITCH_STATE=0
-
-local PITCH_Diff1 = 0
-local PITCH_Diff2 = 0
-
-local PITCHTimeSec = 0.1
-local PITCHIncrement = update_time_step / PITCHTimeSec
 
 local ROLL_TARGET = 0 
 local ROLL_ERROR = 0
-local ROLL_STATE =0
-
-local ROLLTimeSec = 0.15
-local ROLLIncrement = update_time_step / ROLLTimeSec
 
 local YAW_STATE = 0 
 local YAW_TARGET = 0
@@ -50,12 +41,20 @@ local YAW_OUTPUT = get_param_handle("CURRENT_YAW_OUTPUT")
 
 local PITCH_PAST = 0
 local GTARGET = 0
-
-local Kp = 0
-local Kd = 0 
-local Ki = 0
+local g = 9.81
 
 
+----PID CONTROLLER-----
+local target = 0
+local meassurement = 0
+local meassurement_prior =0
+local error_prior = 0
+local integral_prior = 0
+local derivative_prior = 0
+local kp = 0.2
+local ki = 0.001
+local kd = 0.1
+local bias = 0
 
 FBW:listen_command(Keys.PlaneTrimUp)
 FBW:listen_command(Keys.PlaneTrimDown)
@@ -72,10 +71,40 @@ FBW:listen_command(10062)--roll
 FBW:listen_command(RUDDER_INPUT)--rudder/yaw
 FBW:listen_command(THROTTLE_INPUT)--throttle
 
+function FBW:PID_controller(target, meassurement, kp,ki,kd,tau,bias)
+    GPOSLIMIT = 9
+    GNEGLIMIT = -3
+    AOALIMIT = 24.2 
+    ROLLRATELIMIT = 260
+    local bias = bias or 0
+    --------------PID------------------------
+    error_prior = 0
+    integral_prior = 0
+    error = target - meassurement
+
+    proportional = kp * error 
+
+    integral = integral_prior + 0.5 * ki * (error + error_prior)
+
+    derivative = 2 * kd * (meassurement - meassurement_prior) 
+                + 2 * (tau - update_time_step) * derivative_prior 
+                / 2 * (tau + update_time_step)
+    
+    value_out = proportional+integral+derivative+bias
+
+    meassurement_prior = meassurement
+    error_prior = error
+    integral_prior = integral
+    derivative_prior = derivative
+    ----------------END OF PID--------------------
+    return value_out
+end
+
 function SetCommand(command,value)
 	if command == 10061 then
         PITCH_INPUT = value
 	end
+    
 	if command == 10062 then
 		ROLL_INPUT = value
 	end
@@ -92,26 +121,32 @@ function SetCommand(command,value)
     if command == 2020 then 
         ROLL_STATE =value
     end 
-	
 
-	
 end
 
 function Sensor_data() 
-
-	PITCH = sensor_data.getPitch()
-    ROLL = sensor_data.getRoll()
+    ias_knots = sensor_data.getIndicatedAirSpeed() * 1.94384
+    tas_knots = sensor_data.getTrueAirSpeed() * 1.94384
+	PITCH = sensor_data.getPitch()* 57.29577951308233
+    ROLL = sensor_data.getRoll()* 57.29577951308233
     NY = sensor_data.getVerticalAcceleration()
     NX = sensor_data.getHorizontalAcceleration()
     NZ = sensor_data.getLateralAcceleration()
     ROLLRATE = sensor_data.getRateOfRoll()* 57.29577951308233
-    PITCH_RATE = sensor_data.getRateOfPitch()* 57.29577951308233
+    PITCHRATE = sensor_data.getRateOfPitch()* 57.29577951308233
     YATRATE = sensor_data.getRateOfYaw()* 57.29577951308233
+    GEARDOWN = sensor_data.getRightMainLandingGearDown()
     GTARGET = (1 + PITCH_INPUT* 100 / 12.5)
     GERROR = GTARGET - NY
-    PITCH_ERROR = PITCH_TARGET - PITCH
-    ROLL_ERROR = ROLL_TARGET - ROLL
-    ias_knots = sensor_data.getIndicatedAirSpeed() * 1.94384
+    PITCHRATETARGET = PITCH_INPUT * 25
+    PITCHRATEERROR = PITCHRATETARGET - PITCHRATE
+    ROLLRATETARGET = ROLL_INPUT * 260
+    ROLLRATEERROR = (ROLLRATETARGET - ROLLRATE) / 26
+    GPOSLIMIT = 0
+    GNEGLIMIT = 0
+    AOALIMIT = 0
+    ROLLRATELIMIT = 0
+
 end
 
 function time_counter()
@@ -126,31 +161,53 @@ end
 function update()
 
     time_counter()
-
     Sensor_data()
-    
 
-    -- print_message_to_user("EUROFIGHTER PITCH OUTPUT"..GERROR / GTARGET)
 
     --EN PRINCIPIO ASÍ VA BIEN
-    -- ESTABLECER MODOS.
+    -- ESTABLECER MODOS. 1. GEAR UP/GEAR DOWN
+    if GEARDOWN == 1 then 
+        GPOSLIMIT = 4
+        GNEGLIMIT = -0
+        AOALIMIT = 24.2
+        ROLLRATELIMIT = 80
+        
+        if ROLL_TARGET > ROLLRATELIMIT then 
+            ROLL_TARGET = ROLLRATELIMIT
+        end
 
-    if GTARGET < 0 then 
-        PITCH_OUTPUT = -1 * (GERROR / GTARGET)
-    else
-        PITCH_OUTPUT = GERROR / GTARGET
+        ROLL_OUTPUT = ROLLRATEERROR 
+        PITCH_OUTPUT = FBW:PID_controller(PITCHRATETARGET,PITCHRATE,2,0.3,-8,0.0225,0.2) --GOOD FOR NOW
+
+    elseif GEARDOWN == 0 then
+
+        GPOSLIMIT = 9
+        GNEGLIMIT = -3
+        AOALIMIT = 24.2 
+        ROLLRATELIMIT = 260
+
+        if ROLL_TARGET > ROLLRATELIMIT then 
+            ROLL_TARGET = ROLLRATELIMIT
+        end
+
+        ROLL_OUTPUT = ROLLRATEERROR 
+        PITCH_OUTPUT = FBW:PID_controller(GTARGET,NY,1,0.8,-4.5,0.0225,0)
+
     end
 
-    ROLL_OUTPUT = ROLL_INPUT
+    -- PITCH_ERROR = PITCH - PITCH_PAST
+    -- PITCH_PAST = PITCH
 
-    if GERROR > 0 then
-        dispatch_action(nil, 2001, PITCH_OUTPUT)	--PITCH
-        -- print_message_to_user(PITCH_OUTPUT)
-    elseif GERROR < 0 then
-        dispatch_action(nil, 2001, PITCH_OUTPUT)	--PITCH
-        -- print_message_to_user(PITCH_OUTPUT)
-    end 
+    -- print_message_to_user("PITCHERROR RATE IS " .. PITCH_ERROR)
+    -- print_message_to_user("PITCHRATE IS " .. PITCHRATE)
 
+    -- print_message_to_user("PITCHERROR IS " .. error )
+    -- print_message_to_user("PID VALUE IS " .. PITCH_OUTPUT)
+    -- print_message_to_user(ROLLRATEERROR)
+    PITCH_STATE = PITCH_INPUT
+    ROLL_STATE = ROLL_INPUT
+
+    dispatch_action(nil, 2001, PITCH_OUTPUT)	--PITCH
     dispatch_action(nil, 2002, ROLL_OUTPUT)	--ROLL
 
 
