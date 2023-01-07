@@ -53,8 +53,8 @@ HUD_base_clip.h_clip_relation   = h_clip_relations.REWRITE_LEVEL
 HUD_base_clip.level             = HUD_DEFAULT_NOCLIP_LEVEL +1
 HUD_base_clip.isdraw            = true
 HUD_base_clip.change_opacity    = true
-HUD_base_clip.element_params    = {"BATTERY"}
-HUD_base_clip.controllers       = {{"parameter_compare_with_number",0,1}}
+HUD_base_clip.element_params    = {"BATTERY","NAV_STATE"}
+HUD_base_clip.controllers       = {{"parameter_compare_with_number",0,1},{"parameter_compare_with_number",1,1}}
 HUD_base_clip.isvisible         = false
 HUD_base_clip.collimated 		= false
 Add(HUD_base_clip)

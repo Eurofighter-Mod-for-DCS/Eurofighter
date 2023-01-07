@@ -142,7 +142,7 @@ HUD_VERTICAL.name                            = "HUD_VERTICAL"
 HUD_VERTICAL.init_pos                        = {0, 0.0, 0} --{0, 0, default_HUD_z_offset}
 HUD_VERTICAL.init_rot                        = {0, 0, 0}
 HUD_VERTICAL.element_params                  = {"HUD_VERTICAL"}
-HUD_VERTICAL.controllers                     = {{"move_up_down_using_parameter",0,0.0013}   }
+HUD_VERTICAL.controllers                     = {{"move_up_down_using_parameter",0,0.0013} }
 HUD_VERTICAL.collimated                      = true
 HUD_VERTICAL.use_mipfilter                   = true
 HUD_VERTICAL.additive_alpha                  = true
@@ -183,9 +183,52 @@ HUD_FD_Y.parent_element                 = "HUD_SQUARE_CLIP"
 HUD_FD_Y.isvisible                      = false
 Add(HUD_FD_Y)
 
+HUD_AOA_Y                               = CreateElement "ceSimple"
+HUD_AOA_Y.name                           = "HUD_AOA_Y"
+HUD_AOA_Y.init_pos                       = {0, 0.13, 0}
+HUD_AOA_Y.init_rot                       = {0, 0, 0}
+HUD_AOA_Y.element_params                 = {"HUD_AOA"}--"HUD_FD_Y"
+HUD_AOA_Y.controllers                    = {{"move_up_down_using_parameter",0,0.03},{"move_up_down_using_parameter",1,-0.00000075}}
+HUD_AOA_Y.collimated                     = true
+HUD_AOA_Y.use_mipfilter                  = true
+HUD_AOA_Y.additive_alpha                 = true
+HUD_AOA_Y.h_clip_relation                = h_clip_relations.COMPARE
+HUD_AOA_Y.level                          = HUD_DEFAULT_NOCLIP_LEVEL +1
+HUD_AOA_Y.parent_element                 = "HUD_SQUARE_CLIP"
+HUD_AOA_Y.isvisible                      = false
+Add(HUD_AOA_Y)
 
 ---------------TEXTURES-------------------------------
+local AOA_Scale                    = CreateElement "ceTexPoly"
+AOA_Scale.vertices                 = hud_vert_gen(1500,1250)
+AOA_Scale.indices                  = {0,1,2,2,3,0}
+AOA_Scale.tex_coords               = tex_coord_gen(0,0,2048,2048,2048,2048)
+AOA_Scale.material                 = AOA_SCALE
+AOA_Scale.name                     = create_guid_string()
+AOA_Scale.init_pos                 = {-0.52 , -0.37, 0}
+AOA_Scale.init_rot                 = {0, 0, 0}
+AOA_Scale.collimated               = true
+AOA_Scale.use_mipfilter            = true
+AOA_Scale.additive_alpha           = false
+AOA_Scale.h_clip_relation          = h_clip_relations.COMPARE
+AOA_Scale.level                    = HUD_DEFAULT_NOCLIP_LEVEL + 2
+AOA_Scale.parent_element           = "HUD_ROLL_STC"
+Add(AOA_Scale)
 
+local HUD_AOA_arrow                   = CreateElement "ceTexPoly"
+HUD_AOA_arrow.vertices                 = hud_vert_gen(1100,1300)
+HUD_AOA_arrow.indices                  = {0,1,2,2,3,0}
+HUD_AOA_arrow.tex_coords               = tex_coord_gen(0,0,2048,2048,2048,2048)
+HUD_AOA_arrow.material                 = HUD_AOA
+HUD_AOA_arrow.name                     = create_guid_string()
+HUD_AOA_arrow.init_pos                 = {-0.45 , -0.48 ,0}
+HUD_AOA_arrow.collimated               = true
+HUD_AOA_arrow.use_mipfilter            = true
+HUD_AOA_arrow.additive_alpha           = false
+HUD_AOA_arrow.h_clip_relation          = h_clip_relations.COMPARE
+HUD_AOA_arrow.level                    = HUD_DEFAULT_NOCLIP_LEVEL +2
+HUD_AOA_arrow.parent_element           = "HUD_AOA_Y"
+Add(HUD_AOA_arrow)
 
 local hud_vectorv_real                     = CreateElement "ceTexPoly"
 hud_vectorv_real.vertices                 = hud_vert_gen(230,230)
@@ -304,7 +347,7 @@ Add(hud_ang_positivo_5)
 sign_number = 5
 
 local hud_ang_numero_5             = CreateElement "ceStringPoly" 
-hud_ang_numero_5.material          = "font_Display_green"             
+hud_ang_numero_5.material          = "green_font_MPCD"             
 hud_ang_numero_5.init_pos          = {-0.36, 0.41,0}      
 hud_ang_numero_5.alignment         = "LeftCenter"       
 hud_ang_numero_5.stringdefs        = {0.00650,0.00650, 0.0006, 0}  
@@ -323,7 +366,7 @@ Add(hud_ang_numero_5)
 sign_number = -5
 
 local hud_ang_numero_m5             = CreateElement "ceStringPoly" 
-hud_ang_numero_m5.material          = "font_Display_green"             
+hud_ang_numero_m5.material          = "green_font_MPCD"             
 hud_ang_numero_m5.init_pos          = {-0.36, -0.56,0}      
 hud_ang_numero_m5.alignment         = "LeftCenter"       
 hud_ang_numero_m5.stringdefs        = {0.00650,0.00650, 0.0006, 0}  
@@ -377,7 +420,7 @@ for i=2,18 do
     Add(hud_ang_positivo)
 
     local hud_ang_numero           = CreateElement "ceStringPoly" 
-    hud_ang_numero.material          = "font_Display_green"             
+    hud_ang_numero.material          = "green_font_MPCD"             
     hud_ang_numero.init_pos          = {-0.36, vertical_distance - 0.05,0}      
     hud_ang_numero.alignment         = "LeftCenter"       
     hud_ang_numero.stringdefs        = {0.00650,0.00650, 0.0006, 0}  
@@ -417,7 +460,7 @@ for i=2,18 do
     Add(hud_ang_negativo)
 
     local hud_ang_numero           = CreateElement "ceStringPoly" 
-    hud_ang_numero.material          = "font_Display_green"             
+    hud_ang_numero.material          = "green_font_MPCD"             
     hud_ang_numero.init_pos          = {-0.36, -vertical_distance-0.09,0}      
     hud_ang_numero.alignment         = "LeftCenter"       
     hud_ang_numero.stringdefs        = {0.00650,0.00650, 0.0006, 0}  
@@ -437,7 +480,7 @@ end
 
 
 local HUD_SPEED_DIS             = CreateElement "ceStringPoly" 
-HUD_SPEED_DIS.material          = "font_Display_green" 
+HUD_SPEED_DIS.material          = "green_font_MPCD" 
 HUD_SPEED_DIS.init_pos          = {-0.43 , 0.2, 0}
 HUD_SPEED_DIS.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
 HUD_SPEED_DIS.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}          
@@ -456,7 +499,7 @@ Add(HUD_SPEED_DIS)
 -- ------------------------------------------------------------------------
 
 local HUD_ALT_DIS             = CreateElement "ceStringPoly" 
-HUD_ALT_DIS.material          = "font_Display_green" 
+HUD_ALT_DIS.material          = "green_font_MPCD" 
 HUD_ALT_DIS.init_pos          = {0.65, 0.2 , 0}
 HUD_ALT_DIS.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
 HUD_ALT_DIS.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}    
@@ -472,6 +515,7 @@ HUD_ALT_DIS.level			    = HUD_DEFAULT_NOCLIP_LEVEL +2
 HUD_ALT_DIS.parent_element    = "HUD_ROLL_STC" 
 Add(HUD_ALT_DIS)
 
+
 local HUD_Circle                    = CreateElement "ceTexPoly"
 HUD_Circle.vertices                 = hud_vert_gen(850,850)
 HUD_Circle.indices                  = {0,1,2,2,3,0}
@@ -486,7 +530,24 @@ HUD_Circle.h_clip_relation          = h_clip_relations.COMPARE
 HUD_Circle.level                    = HUD_DEFAULT_NOCLIP_LEVEL +2
 HUD_Circle.parent_element           = "HUD_ROLL_STC"
 Add(HUD_Circle)
-
+------------------------------------------------------GEAR--------------------------------------------------------------
+--local HUD_gearN                    = CreateElement "ceTexPoly"
+--HUD_gearN.vertices                 = hud_vert_gen(850,850)
+--HUD_gearN.indices                  = {0,1,2,2,3,0}
+--HUD_gearN.tex_coords               = tex_coord_gen(0,0,2048,2048,2048,2048)
+--HUD_gearN.material                 = HUD_GEAR
+--HUD_gearN.element_params           = {"HUD_GEAR_F_STATE"}
+--HUD_gearN.controllers              = {{"parameter_compare_with_number",0,1},{"parameter_compare_with_number",0,1}}
+--HUD_gearN.name                     = create_guid_string()
+--HUD_gearN.init_pos                 = {-0.5 , -0.90 , 0}
+--HUD_gearN.collimated               = true
+--HUD_gearN.use_mipfilter            = true
+--HUD_gearN.additive_alpha           = false
+--HUD_gearN.h_clip_relation          = h_clip_relations.COMPARE
+--HUD_gearN.level                    = HUD_DEFAULT_NOCLIP_LEVEL +2
+--HUD_gearN.parent_element           = "HUD_SQUARE_CLIP"
+--Add(HUD_gearN)
+--------------------------------------------------------------------------------------------------------------------------
 local HUD_ALT_ROT_R                   = CreateElement "ceTexPoly"
 HUD_ALT_ROT_R.vertices                 = hud_vert_gen(620,620)
 HUD_ALT_ROT_R.indices                  = {0,1,2,0,3,2}
@@ -506,7 +567,7 @@ HUD_ALT_ROT_R.parent_element           = "HUD_ROLL_STC"
 Add(HUD_ALT_ROT_R)
 
 local HUD_ALT_RAD             = CreateElement "ceStringPoly" 
-HUD_ALT_RAD.material          = "font_Display_green" 
+HUD_ALT_RAD.material          = "green_font_MPCD" 
 HUD_ALT_RAD.init_pos          = {0.92, 0.18 , 0}
 HUD_ALT_RAD.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
 HUD_ALT_RAD.stringdefs        = {0.00650, 0.00650, 0.0006, 0.0}    
@@ -523,7 +584,7 @@ HUD_ALT_RAD.parent_element    = "HUD_ROLL_STC"
 Add(HUD_ALT_RAD)
 
 local HUD_ALT_RAD_R               = CreateElement "ceStringPoly" 
-HUD_ALT_RAD_R.material            = "font_Display_green"             
+HUD_ALT_RAD_R.material            = "green_font_MPCD"             
 HUD_ALT_RAD_R.init_pos            = {0.86, 0.25 , 0}      
 HUD_ALT_RAD_R.alignment           = "RightCenter"       
 HUD_ALT_RAD_R.stringdefs          = {0.00650,0.00650, 0.0006, 0}  
@@ -539,13 +600,13 @@ Add(HUD_ALT_RAD_R)
 
 
 local HUD_MACH_DIS             = CreateElement "ceStringPoly" 
-HUD_MACH_DIS.material          = "font_Display_green" 
+HUD_MACH_DIS.material          = "green_font_MPCD" 
 HUD_MACH_DIS.init_pos          = {-0.62 , 0.1, 0}
 HUD_MACH_DIS.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
 HUD_MACH_DIS.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}          
 HUD_MACH_DIS.formats           = {"%.2f","%s"} 
-HUD_MACH_DIS.element_params    = {"HUD_MACH"}
-HUD_MACH_DIS.controllers       = {{"text_using_parameter",0},}
+HUD_MACH_DIS.element_params    = {"HUD_MACH","HUD2ONOFF"}
+HUD_MACH_DIS.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,1}}
 HUD_MACH_DIS.collimated        = true
 HUD_MACH_DIS.use_mipfilter     = true
 HUD_MACH_DIS.additive_alpha    = false
@@ -555,15 +616,32 @@ HUD_MACH_DIS.level			    = HUD_DEFAULT_NOCLIP_LEVEL +2
 HUD_MACH_DIS.parent_element    = "HUD_ROLL_STC" 
 Add(HUD_MACH_DIS)
 
+local HUD_GS_DIS             = CreateElement "ceStringPoly" 
+HUD_GS_DIS.material          = "green_font_MPCD" 
+HUD_GS_DIS.init_pos          = {-0.62 , 0.1, 0}
+HUD_GS_DIS.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
+HUD_GS_DIS.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}          
+HUD_GS_DIS.formats           = {"%.0f","%s"} 
+HUD_GS_DIS.element_params    = {"HUD_SPEED_DIS","HUD2ONOFF"}
+HUD_GS_DIS.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,0}}
+HUD_GS_DIS.collimated        = true
+HUD_GS_DIS.use_mipfilter     = true
+HUD_GS_DIS.additive_alpha    = false
+HUD_GS_DIS.isvisible		 = true
+HUD_GS_DIS.h_clip_relation   = h_clip_relations.COMPARE 
+HUD_GS_DIS.level			 = HUD_DEFAULT_NOCLIP_LEVEL +2
+HUD_GS_DIS.parent_element    = "HUD_ROLL_STC" 
+Add(HUD_GS_DIS)
+
 
 local hud_macho             = CreateElement "ceStringPoly" 
-hud_macho.material          = "font_Display_green"             
-hud_macho.init_pos          = {-0.73 , 0.2 , 0}     
+hud_macho.material          = "green_font_MPCD"             
+hud_macho.init_pos          = {-0.73 , 0.18 , 0}     
 hud_macho.alignment         = "LeftCenter"       
 hud_macho.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
 hud_macho.formats           = {"M","%s"} 
-hud_macho.element_params    = {"HUD_ANG_NUM"}
-hud_macho.controllers       = {{"text_using_parameter",0}}
+hud_macho.element_params    = {"HUD_ANG_NUM","HUD2ONOFF"}
+hud_macho.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,1}}
 hud_macho.collimated        = true
 hud_macho.use_mipfilter     = true
 hud_macho.additive_alpha    = false
@@ -573,13 +651,149 @@ hud_macho.level			    = HUD_DEFAULT_NOCLIP_LEVEL + 2
 hud_macho.parent_element    = "HUD_ROLL_STC"  
 Add(hud_macho)
 
-------------------------------------------------------------------------------------
+local hud_ground             = CreateElement "ceStringPoly" 
+hud_ground.material          = "green_font_MPCD"             
+hud_ground.init_pos          = {-0.73 , 0.18 , 0}     
+hud_ground.alignment         = "LeftCenter"       
+hud_ground.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
+hud_ground.formats           = {"GS","%s"} 
+hud_ground.element_params    = {"HUD_ANG_NUM","HUD2ONOFF"}
+hud_ground.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,0}}
+hud_ground.collimated        = true
+hud_ground.use_mipfilter     = true
+hud_ground.additive_alpha    = false
+hud_ground.isvisible    	 = true
+hud_ground.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_ground.level	  	     = HUD_DEFAULT_NOCLIP_LEVEL + 2
+hud_ground.parent_element    = "HUD_ROLL_STC"  
+Add(hud_ground)
 
+------------------------------------------------------------------------------------
+local hud_Ngear             = CreateElement "ceStringPoly" 
+hud_Ngear.material          = "green_font_MPCD"             
+hud_Ngear.init_pos          = {-0.515 , -0.90 , 0}     
+hud_Ngear.alignment         = "Center"       
+hud_Ngear.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
+hud_Ngear.formats           = {"D","%s"} 
+hud_Ngear.element_params    = {"HUD_ANG_NUM","NOSEGEAR"}
+hud_Ngear.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,1}}
+hud_Ngear.collimated        = true
+hud_Ngear.use_mipfilter     = true
+hud_Ngear.additive_alpha    = false
+hud_Ngear.isvisible		    = true
+hud_Ngear.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_Ngear.level			    = HUD_DEFAULT_NOCLIP_LEVEL + 2
+hud_Ngear.parent_element    = "HUD_ROLL_STC"  
+Add(hud_Ngear)
+
+local hud_NgearIN             = CreateElement "ceStringPoly" 
+hud_NgearIN.material          = "green_font_MPCD"             
+hud_NgearIN.init_pos          = {-0.515 , -0.8 , 0}     
+hud_NgearIN.alignment         = "Center"       
+hud_NgearIN.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
+hud_NgearIN.formats           = {"U","%s"} 
+hud_NgearIN.element_params    = {"HUD_ANG_NUM","NOSEGEAR"}
+hud_NgearIN.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,0}}
+hud_NgearIN.collimated        = true
+hud_NgearIN.use_mipfilter     = true
+hud_NgearIN.additive_alpha    = false
+hud_NgearIN.isvisible		    = true
+hud_NgearIN.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_NgearIN.level			    = HUD_DEFAULT_NOCLIP_LEVEL + 2
+hud_NgearIN.parent_element    = "HUD_ROLL_STC"  
+Add(hud_NgearIN)
+
+local hud_Rgear             = CreateElement "ceStringPoly" 
+hud_Rgear.material          = "green_font_MPCD"             
+hud_Rgear.init_pos          = {-0.38 , -0.90 , 0}     
+hud_Rgear.alignment         = "Center"       
+hud_Rgear.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
+hud_Rgear.formats           = {"D","%s"} 
+hud_Rgear.element_params    = {"HUD_ANG_NUM","RIGHTGEAR"}
+hud_Rgear.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,1}}
+hud_Rgear.collimated        = true
+hud_Rgear.use_mipfilter     = true
+hud_Rgear.additive_alpha    = false
+hud_Rgear.isvisible		    = true
+hud_Rgear.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_Rgear.level			    = HUD_DEFAULT_NOCLIP_LEVEL + 2
+hud_Rgear.parent_element    = "HUD_ROLL_STC"  
+Add(hud_Rgear)
+
+local hud_RgearIN             = CreateElement "ceStringPoly" 
+hud_RgearIN.material          = "green_font_MPCD"             
+hud_RgearIN.init_pos          = {-0.38 , -0.8 , 0}     
+hud_RgearIN.alignment         = "Center"       
+hud_RgearIN.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
+hud_RgearIN.formats           = {"U","%s"} 
+hud_RgearIN.element_params    = {"HUD_ANG_NUM","RIGHTGEAR"}
+hud_RgearIN.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,0}}
+hud_RgearIN.collimated        = true
+hud_RgearIN.use_mipfilter     = true
+hud_RgearIN.additive_alpha    = false
+hud_RgearIN.isvisible		    = true
+hud_RgearIN.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_RgearIN.level			    = HUD_DEFAULT_NOCLIP_LEVEL + 2
+hud_RgearIN.parent_element    = "HUD_ROLL_STC"  
+Add(hud_RgearIN)
+
+local hud_Lgear             = CreateElement "ceStringPoly" 
+hud_Lgear.material          = "green_font_MPCD"             
+hud_Lgear.init_pos          = {-0.65 , -0.90 , 0}     
+hud_Lgear.alignment         = "Center"       
+hud_Lgear.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
+hud_Lgear.formats           = {"D","%s"} 
+hud_Lgear.element_params    = {"HUD_ANG_NUM","LEFTGEAR"}
+hud_Lgear.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,1}}
+hud_Lgear.collimated        = true
+hud_Lgear.use_mipfilter     = true
+hud_Lgear.additive_alpha    = false
+hud_Lgear.isvisible		    = true
+hud_Lgear.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_Lgear.level			    = HUD_DEFAULT_NOCLIP_LEVEL + 2
+hud_Lgear.parent_element    = "HUD_ROLL_STC"  
+Add(hud_Lgear)
+
+local hud_LgearIN             = CreateElement "ceStringPoly" 
+hud_LgearIN.material          = "green_font_MPCD"             
+hud_LgearIN.init_pos          = {-0.65 , -0.8 , 0}     
+hud_LgearIN.alignment         = "Center"       
+hud_LgearIN.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}   
+hud_LgearIN.formats           = {"U","%s"} 
+hud_LgearIN.element_params    = {"HUD_ANG_NUM","LEFTGEAR"}
+hud_LgearIN.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,0}}
+hud_LgearIN.collimated        = true
+hud_LgearIN.use_mipfilter     = true
+hud_LgearIN.additive_alpha    = false
+hud_LgearIN.isvisible		    = true
+hud_LgearIN.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_LgearIN.level			    = HUD_DEFAULT_NOCLIP_LEVEL + 2
+hud_LgearIN.parent_element    = "HUD_ROLL_STC"  
+Add(hud_LgearIN)
+
+local HUD_gear                    = CreateElement "ceTexPoly"
+HUD_gear.vertices                 = hud_vert_gen(850,850)
+HUD_gear.indices                  = {0,1,2,2,3,0}
+HUD_gear.tex_coords               = tex_coord_gen(0,0,2048,2048,2048,2048)
+HUD_gear.material                 = HUD_GEAR
+HUD_gear.name                     = create_guid_string()
+HUD_gear.init_pos                 = {-0.5 , -0.82 , 0}
+HUD_gear.collimated               = true
+HUD_gear.use_mipfilter            = true
+HUD_gear.additive_alpha           = false
+hud_Ngear.isvisible		          = true
+HUD_gear.h_clip_relation          = h_clip_relations.COMPARE
+HUD_gear.level                    = HUD_DEFAULT_NOCLIP_LEVEL +2
+HUD_gear.parent_element           = "HUD_SQUARE_CLIP"
+Add(HUD_gear)
+
+
+------------------------------------------------------------------------------------
 local HUD_GZ_DIS             = CreateElement "ceStringPoly" 
-HUD_GZ_DIS.material          = "font_Display_green" 
+HUD_GZ_DIS.material          = "green_font_MPCD" 
 HUD_GZ_DIS.init_pos          = {-0.62 , -0.4, 0}
 HUD_GZ_DIS.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
-HUD_GZ_DIS.stringdefs        = {0.00850, 0.00850, 0.0008, 0.0}          
+HUD_GZ_DIS.stringdefs        = {0.00850, 0.00850, 0.0006, 0.0}          
 HUD_GZ_DIS.formats           = {"%.1f","%s"} 
 HUD_GZ_DIS.element_params    = {"HUD_GZ"}
 HUD_GZ_DIS.controllers       = {{"text_using_parameter",0},}
@@ -615,7 +829,7 @@ for i = 1,3 do
     sign_number = i
     vertical_distance = 0.065 * i
     local hud_vv_num1         = CreateElement "ceStringPoly" 
-    hud_vv_num1.material          = "font_Display_green"             
+    hud_vv_num1.material          = "green_font_MPCD"             
     hud_vv_num1.init_pos          = {0.5, vertical_distance-0.25,0}      
     hud_vv_num1.alignment         = "LeftCenter"       
     hud_vv_num1.stringdefs        = {0.00650,0.00650, 0.0006, 0}  
@@ -636,7 +850,7 @@ for i = 1,3 do
     sign_number = i
     vertical_distance = 0.065 * i
     local hud_vv_num1         = CreateElement "ceStringPoly" 
-    hud_vv_num1.material          = "font_Display_green"             
+    hud_vv_num1.material          = "green_font_MPCD"             
     hud_vv_num1.init_pos          = {0.5, -vertical_distance-0.26,0}      
     hud_vv_num1.alignment         = "LeftCenter"       
     hud_vv_num1.stringdefs        = {0.00650,0.00650, 0.0006, 0}  
@@ -773,7 +987,7 @@ for i = 1, 36 do
         point_distance = i * 0.32 -0.202
     end
     local hud_hdg_num               = CreateElement "ceStringPoly" 
-    hud_hdg_num.material            = "font_Display_green"             
+    hud_hdg_num.material            = "green_font_MPCD"             
     hud_hdg_num.init_pos            = {point_distance, 0.05,0}      
     hud_hdg_num.alignment           = "LeftCenter"       
     hud_hdg_num.stringdefs          = {0.00650,0.00650, 0.0006, 0}  
@@ -793,7 +1007,7 @@ for i = 1, 36 do
 end
 
 local hud_hdg_num_01               = CreateElement "ceStringPoly" 
-hud_hdg_num_01.material            = "font_Display_green"             
+hud_hdg_num_01.material            = "green_font_MPCD"             
 hud_hdg_num_01.init_pos            = {37 * 0.32 -0.24, 0.05,0}      
 hud_hdg_num_01.alignment           = "LeftCenter"       
 hud_hdg_num_01.stringdefs          = {0.00650,0.00650, 0.0006, 0}  
@@ -813,7 +1027,7 @@ Add(hud_hdg_num_01)
 for i =1, 9 do 
     point_distance = i * 0.32
     local hud_hdg_num_0                 = CreateElement "ceStringPoly" 
-    hud_hdg_num_0.material              = "font_Display_green"             
+    hud_hdg_num_0.material              = "green_font_MPCD"             
     hud_hdg_num_0.init_pos              = {point_distance-0.24, 0.05,0}      
     hud_hdg_num_0.alignment             = "LeftCenter"       
     hud_hdg_num_0.stringdefs            = {0.00650,0.00650, 0.0006, 0}  
@@ -870,7 +1084,7 @@ for i = 1, 4 do
     Add(HUD_Rumbos_F)
     if i == 2 then 
         local hud_hdg_num_35               = CreateElement "ceStringPoly" 
-        hud_hdg_num_35.material            = "font_Display_green"             
+        hud_hdg_num_35.material            = "green_font_MPCD"             
         hud_hdg_num_35.init_pos            = {point_distance+ 0.237, -0.05,0}   
         hud_hdg_num_35.init_rot            = {180, 0, 0}   
         hud_hdg_num_35.alignment           = "LeftCenter"       
@@ -889,7 +1103,7 @@ for i = 1, 4 do
     elseif i == 1 then
 
         local hud_hdg_num_36                = CreateElement "ceStringPoly" 
-        hud_hdg_num_36.material             = "font_Display_green"             
+        hud_hdg_num_36.material             = "green_font_MPCD"             
         hud_hdg_num_36.init_pos             = {0.237, -0.05,0}  
         hud_hdg_num_36.init_rot             = {180, 0, 0}      
         hud_hdg_num_36.alignment            = "LeftCenter"       
