@@ -29,6 +29,7 @@ local HMD_ladder_color      = {210,150,230,255}
 HMD_CROSS           = MakeMaterial(HMD_IND_TEX_PATH.."EFAHMD.dds", GreenColor)
 HMD_ALTCIRCLE       = MakeMaterial(HMD_IND_TEX_PATH.."altitud.dds", GreenColor)
 HMD_M               = MakeMaterial(HMD_IND_TEX_PATH.."MText.tga", GreenColor)
+AOA_SCALE           = MakeMaterial(HMD_IND_TEX_PATH.."Energy_Cue.dds", GreenColor)
 
 
 default_HMD_x = 6000
