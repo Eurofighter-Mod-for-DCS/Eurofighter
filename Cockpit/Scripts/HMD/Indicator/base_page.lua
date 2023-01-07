@@ -49,10 +49,8 @@ HMD_PITCH.parent_element                 = "HMD_base_clip"
 HMD_PITCH.isvisible                      = true
 Add(HMD_PITCH)
 
-
-
 local HMD_Cross                    = CreateElement "ceTexPoly"
-HMD_Cross.vertices                 = HMD_vert_gen(4750,4750)
+HMD_Cross.vertices                 = HMD_vert_gen(3000,3000)
 HMD_Cross.indices                  = {0,1,2,2,3,0}
 HMD_Cross.tex_coords               = tex_coord_gen(0,0,1024,1024,1024,1024)
 HMD_Cross.material                 = HMD_CROSS
@@ -64,8 +62,26 @@ HMD_Cross.use_mipfilter            = true
 HMD_Cross.additive_alpha           = false
 HMD_Cross.h_clip_relation          = h_clip_relations.COMPARE
 HMD_Cross.level                    = HMD_DEFAULT_NOCLIP_LEVEL +1
-HMD_Cross.parent_element           = "HMD_PITCH"
+HMD_Cross.parent_element           = "HMD_base_clip"
+HMD_Cross.isvisible                = true
 Add(HMD_Cross)
+
+local AOAind                    = CreateElement "ceTexPoly"
+AOAind.vertices                 = HMD_vert_gen(7000,7000)
+AOAind.indices                  = {0,1,2,2,3,0}
+AOAind.tex_coords               = tex_coord_gen(0,0,1024,1024,1024,1024)
+AOAind.material                 = AOA_SCALE
+AOAind.name                     = create_guid_string()
+AOAind.init_pos                 = {-1.1, -0.03, 0}
+AOAind.init_rot                 = {0, 0, 0}
+AOAind.collimated               = true
+AOAind.use_mipfilter            = true
+AOAind.additive_alpha           = false
+AOAind.h_clip_relation          = h_clip_relations.COMPARE
+AOAind.level                    = HMD_DEFAULT_NOCLIP_LEVEL +1
+AOAind.parent_element           = "HMD_base_clip"
+AOAind.isvisible                = true
+Add(AOAind)
 
 local HMD_Circle                    = CreateElement "ceTexPoly"
 HMD_Circle.vertices                 = HMD_vert_gen(4750,4750)
@@ -90,8 +106,8 @@ hud_macho.init_pos          = {-1.65 , 0.85 , 0}
 hud_macho.alignment         = "LeftCenter"       
 hud_macho.stringdefs        = {0.02, 0.02, 0.002, 0.0}   
 hud_macho.formats           = {"M","%s"} 
-hud_macho.element_params    = {"HMD_MACH_M"}
-hud_macho.controllers       = {{"text_using_parameter",0}}
+hud_macho.element_params    = {"HMD_MACH_M","HUD2ONOFF"}
+hud_macho.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,1}}
 hud_macho.collimated        = true
 hud_macho.use_mipfilter     = true
 hud_macho.additive_alpha    = false
@@ -141,6 +157,40 @@ HMD_ALT_DIS.parent_element    = "HMD_PITCH"
 Add(HMD_ALT_DIS)
 
 -- --------------------------------------------------------------------
+local HMD_GS_DIS             = CreateElement "ceStringPoly" 
+HMD_GS_DIS.material          = "font_Display_green" 
+HMD_GS_DIS.init_pos          = {-1.4 , 0.65 , 0}
+HMD_GS_DIS.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
+HMD_GS_DIS.stringdefs        = {0.02, 0.02, 0.002, 0.0}          
+HMD_GS_DIS.formats           = {"%.0f","%s"} 
+HMD_GS_DIS.element_params    = {"HUD_SPEED_DIS","HUD2ONOFF"}
+HMD_GS_DIS.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,0}}
+HMD_GS_DIS.collimated        = true
+HMD_GS_DIS.use_mipfilter     = true
+HMD_GS_DIS.additive_alpha    = false
+HMD_GS_DIS.isvisible		    = true
+HMD_GS_DIS.h_clip_relation   = h_clip_relations.COMPARE 
+HMD_GS_DIS.level			    = HMD_DEFAULT_NOCLIP_LEVEL +1
+HMD_GS_DIS.parent_element    = "HMD_PITCH" 
+Add(HMD_GS_DIS)
+
+local hud_GS             = CreateElement "ceStringPoly" 
+hud_GS.material          = "font_Display_green"             
+hud_GS.init_pos          = {-1.65 , 0.85 , 0}    
+hud_GS.alignment         = "LeftCenter"       
+hud_GS.stringdefs        = {0.02, 0.02, 0.002, 0.0}   
+hud_GS.formats           = {"GS","%s"} 
+hud_GS.element_params    = {"HMD_MACH_M","HUD2ONOFF"}
+hud_GS.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,0}}
+hud_GS.collimated        = true
+hud_GS.use_mipfilter     = true
+hud_GS.additive_alpha    = false
+hud_GS.isvisible		    = true
+hud_GS.h_clip_relation   = h_clip_relations.COMPARE -- INCREASE_IF_LEVEL-- --REWRITE_LEVEL
+hud_GS.level			    = HMD_DEFAULT_NOCLIP_LEVEL +1
+hud_GS.parent_element    = "HMD_PITCH"  
+Add(hud_GS)
+-----------------------------------------------------------------------
 
 
 local HMD_MACH_DIS             = CreateElement "ceStringPoly" 
@@ -149,8 +199,8 @@ HMD_MACH_DIS.init_pos          = {-1.4 , 0.65 , 0}
 HMD_MACH_DIS.alignment         = "RightCenter" --Left/Right/Center; Top/Down/Center
 HMD_MACH_DIS.stringdefs        = {0.02, 0.02, 0.002, 0.0}          
 HMD_MACH_DIS.formats           = {"%.2f","%s"} 
-HMD_MACH_DIS.element_params    = {"HMD_MACH"}
-HMD_MACH_DIS.controllers       = {{"text_using_parameter",0},}
+HMD_MACH_DIS.element_params    = {"HMD_MACH","HUD2ONOFF"}
+HMD_MACH_DIS.controllers       = {{"text_using_parameter",0},{"parameter_compare_with_number",1,1}}
 HMD_MACH_DIS.collimated        = true
 HMD_MACH_DIS.use_mipfilter     = true
 HMD_MACH_DIS.additive_alpha    = false
