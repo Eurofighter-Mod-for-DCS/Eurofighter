@@ -321,9 +321,7 @@ elements["MAW"] 		 		= default_2_position_tumb("MAW On/Off",  devices.UTILITIES,
 elements["INT"] 		 		= default_2_position_tumb("INT On/Off",  devices.UTILITIES, device_commands.INTONOFF, 714)
 elements["XPDR"] 		 		= default_2_position_tumb("XPDR On/Off",  devices.UTILITIES, device_commands.XPDRONOFF, 715)
 elements["FLIR"] 		 		= default_2_position_tumb("FLIR On/Off",  devices.UTILITIES, device_commands.FLIRONOFF, 716)
------------------------------------------------------------------------------------------------------------------------------------------
 elements["HEA"] 		 		= default_2_position_tumb("HEA On/Off",  devices.UTILITIES, device_commands.HEA, 718)  --HMD Switch
------------------------------------------------------------------------------------------------------------------------------------------
 elements["ECM"] 		 		= default_2_position_tumb("ECK On/Off",  devices.UTILITIES, device_commands.ECKONOFF, 719)
 elements["R_ALT"] 		 		= default_2_position_tumb("R ALT On/Off",  devices.UTILITIES, device_commands.R_ALTONOFF, 720)
 elements["HTA"] 		 		= default_2_position_tumb("FBW On/Off",  devices.FBW_SYSTEM, device_commands.FBWONOFF, 721)
@@ -331,11 +329,11 @@ elements["Mids"] 		 		= default_2_position_tumb("MIDS On/Off",  devices.UTILITIE
 elements["Radio_02"] 		 	= default_2_position_tumb("Radio 2 On/Off",  devices.UTILITIES, device_commands.Radio_02ONOFF, 723)
 elements["Radio_01"] 		 	= default_2_position_tumb("Radio 1 On/Off",  devices.UTILITIES, device_commands.Radio_01ONOFF, 724)
 elements["Voice"] 		 		= default_2_position_tumb("VOICE On/Off",  devices.UTILITIES, device_commands.VoiceONOFF, 725)
+elements["HUD02"]				= default_button("HUD BUTTON 2", devices.UTILITIES, device_commands.HUD02 , 726)
 
 ---HUD
 
 elements["HUD01"]					= default_button("HUD BUTTON 1", devices.HUD, device_commands.HUD01 , nil,nil,nil)
-elements["HUD02"]					= default_button("HUD BUTTON 2", devices.HUD, device_commands.HUD02 , nil,nil,nil)
 elements["HUD03"]					= default_button("HUD BUTTON 3", devices.HUD, device_commands.HUD03 , nil,nil,nil)
 elements["HUD04"]					= default_button("HUD BUTTON 4", devices.HUD, device_commands.HUD04 , nil,nil,nil)
 elements["HUD05"]					= default_button("HUD BUTTON 5", devices.HUD, device_commands.HUD05 , nil,nil,nil)

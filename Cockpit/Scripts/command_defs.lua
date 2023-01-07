@@ -528,6 +528,7 @@ device_commands =
 	XPDRONOFF			= __counter(),
 	FLIRONOFF			= __counter(),
 	HEAONOFF			= __counter(),
+	HUD2ONOFF			= __counter(),
 	ECKONOFF			= __counter(),
 	R_ALTONOFF			= __counter(),
 	HTAONOFF			= __counter(),
@@ -551,20 +552,21 @@ device_commands =
 	LCOVER				= __counter(),
 	NAVONOFF			= __counter(),
 	FBWONOFF			= __counter(),
-	ACGen1Switch		= __counter(),
-	ACGen2Switch		= __counter(),
+	GenLeftSwitch		= __counter(),
+	GenRightSwitch		= __counter(),
 	DRAGCHUTE			= __counter(),
 	LOW_HT				= __counter(),
 	RADAR_UP			= __counter(),
 	RADAR_DOWN			= __counter(),
 	RECOVER				= __counter(),
-	HEA		        	= __counter(),
+	HEA                 = __counter(),
 
 	AP					= __counter(),
 	AT					= __counter(),
 	HDG					= __counter(),
 	TRK					= __counter(),
 	ALT					= __counter(),
+	GEARONOFF           = __counter(),
 
 
 	HUD01 				= __counter(),
@@ -574,4 +576,12 @@ device_commands =
 	HUD05 				= __counter(),
 
 
+}
+
+fbw_axis = 
+{
+	PITCHBW_AXIS  = 10061,
+	ROLLBW_AXIS   = 10062,
+	YAWBW_AXIS    = 10063,
+	AUTOTHROTTLE  = 10064,
 }
