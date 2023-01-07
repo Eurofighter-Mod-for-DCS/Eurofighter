@@ -22,10 +22,15 @@ local parameters =
     LOW_HEIGHT      = get_param_handle("LOW_HEIGHT"),
     PARACHUTE       = get_param_handle("PARACHUTE"),
     HEAONOFF             =get_param_handle("HEAONOFF"),
+    HUD2ONOFF              =get_param_handle("HUD2ONOFF"),
+    GEARONOFF             =get_param_handle("GEARONOFF"),
 }
 
 local fuel_cover_click = device_commands.FuelProbeCover
 local fuel_cover_state = 0
+
+local gear_state = sensor_data:getRightMainLandingGearDown()
+local gear_switch = device_commands.GearSwitch
 
 -- RADAR
 
@@ -46,9 +51,15 @@ local airtoair_switch = device_commands.AIRTOAIR
 local navmode_switch = device_commands.NAVMODE
 local airtoair_key  = Keys.PlaneModeBVR
 local navmode_key   = Keys.PlaneModeNAV
+
 -- HMD
 local HEA_switch    = device_commands.HEA
 local HEA_state     = 0
+
+--HUD
+local HUD2_switch  = device_commands.HUD02
+local HUD2_state   = 1
+
 -- LIGHTS
 local landinglight_switch = device_commands.LANDONOFF
 local landinglight_key  = Keys.PlaneHeadLightOnOff
@@ -171,6 +182,10 @@ utilites:listen_command(RECOVER)
 utilites:listen_command(HEA_state)
 utilites:listen_command(HEA_switch)
 utilites:listen_command(HEA_action)
+utilites:listen_command(HUD2_switch)
+utilites:listen_command(HUD2_state)
+utilites:listen_command(gear_switch)
+utilites:listen_command(gear_state)
 ------------------------------------------------------------------FUNCTION-POST-INIT---------------------------------------------------------------------------------------------------
 function post_initialize()
     birth = LockOn_Options.init_conditions.birth_place
@@ -274,13 +289,26 @@ function SetCommand(command,value)
     elseif command == FLIROnOff_action and FLIRState == 1 then
         FLIRState = 0 
     end
+    if command == FlirSwitch then
+        dispatch_action(nil,FLIROnOff_action)
+    end
+
+    if command == gear_switch and gear_state == 1 then
+        gear_state = 0
+    elseif command == gear_switch and gear_state == 0 then
+        gear_state = 1
+    end
+
     if command == HEA_switch and HEA_state == 0 then 
         HEA_state = 1 
     elseif command == HEA_switch and HEA_state == 1 then
         HEA_state = 0 
     end
-    if command == FlirSwitch then
-        dispatch_action(nil,FLIROnOff_action)
+
+    if command == HUD2_switch and HUD2_state == 0 then 
+        HUD2_state = 1 
+    elseif command == HUD2_switch and HUD2_state == 1 then
+        HUD2_state = 0 
     end
 
     if command == airtoair_switch then 
@@ -336,7 +364,7 @@ function SetCommand(command,value)
         dispatch_action(nil, 175)
     end
 
-    local test = false
+
     if command == Keys.PlaneModeNAV  then
         navmode = 1
         bvrmode = 0
@@ -347,6 +375,7 @@ function SetCommand(command,value)
         Cannonmode = 0
         Gridmode = 0
         HideFc3Hud()
+        dispatch_action(nil, 749)
         -- print_message_to_user(HMD_Mode)
     elseif command == Keys.PlaneModeBVR  then
         bvrmode = 1
@@ -431,8 +460,8 @@ function SetCommand(command,value)
         FIOmode = 0
         Groundmode = 0
         Cannonmode = 0
-        navmode = 1
-        HideFc3Hud()
+        navmode = 0
+        ShowFc3Hud()
     end
 
 
@@ -497,14 +526,15 @@ function update()
     -- parameters.FLIRPARAM:set(FLIRState)
     parameters.nav_state:set(navmode)
     parameters.HEAONOFF:set(HEA_state)
-    
-
+    parameters.HUD2ONOFF:set(HUD2_state)
+    parameters.GEARONOFF:set(gear_state)
+    print_message_to_user (GEARDOWN)
     time = time + update_time_step
     if time >= 1.25 then
         time = 0
     end
 
-    --print_message_to_user (HEA_state)
+    -- print_message_to_user (hook_state)
 
     if navlight_state == 0 then
         set_aircraft_draw_argument_value(191,1) 
@@ -561,4 +591,6 @@ function update()
 
     local anticollconector = get_clickable_element_reference("AntiCollision")
     anticollconector:update() -- ensure the connector moves too
+
+    gear_state:update() -- ensure the connector moves too
 end
