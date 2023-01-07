@@ -8,6 +8,7 @@ local update_time_step = 0.02
 make_default_activity(update_time_step)
 
 local HUD_mach = get_param_handle("HUD_MACH")
+local HUD_gs = get_param_handle("HUD_GS")
 local HUD_GES = get_param_handle("HUD_GES")
 local HUD_roll = get_param_handle("HUD_ROLL")
 local HUD_vertical = get_param_handle("HUD_VERTICAL")
@@ -37,6 +38,9 @@ local HUD_GEAR_F_STATE = get_param_handle("HUD_GEAR_F_STATE")
 local GEAR =get_param_handle("GEAR")
 local HUD_GEAR_OPACITY = get_param_handle("HUD_GEAR_OPACITY")
 local HUD_RADALT_OPACITY = get_param_handle("HUD_RADALT_OPACITY")
+local FrontGear = get_param_handle("NOSEGEAR")
+local LeftGear = get_param_handle("LEFTGEAR")
+local RightGear = get_param_handle("RIGHTGEAR")
 
 local sensor_data = get_base_data()
 local ias_conversion_to_knots = 1.9504132
@@ -63,6 +67,12 @@ function update()
     HUD_DIS_ENABLE:set(PowerOnOff)
     HUD_yaw:set(sensor_data.getRateOfYaw())
     HUD_roll:set(sensor_data.getRoll())
+    HUD_gs:set(sensor_data.getIndicatedAirSpeed)
+    local gear_state = sensor_data:getRightMainLandingGearDown()
+    FrontGear:set(sensor_data.getNoseLandingGearDown())
+    LeftGear:set(sensor_data.getLeftMainLandingGearDown())
+    RightGear:set(sensor_data.getRightMainLandingGearDown())
+        
     VV = sensor_data.getVerticalVelocity()
     if VV > 18 then 
         VV = 18
@@ -88,10 +98,18 @@ function update()
     HUD_FD_y:set(HUD_AoA)
     HUD_Gz:set(sensor_data.getVerticalAcceleration())
     HUD_Rumbos_MAG:set(sensor_data.getMagneticHeading()* RAD_TO_DEGREE)
+    --HUD_GEAR_F_STATE:set()
+    --print_message_to_user(HUD_GEAR_F_STATE)
+    --print_message_to_user(HUD_FD_y)
     -- print_message_to_user(HUD_vertical)
     -- HUD_hdg_dis:set(sensor_data.getMagneticHeHUDng() *RAD_TO_DEGREE)
     HUD_aoa_dis:set(sensor_data.getAngleOfAttack())
     -- HUD_hsi_rot:set(sensor_data.getHeHUDng())
     local current_aoa = sensor_data.getAngleOfAttack()
+    local test = sensor_data.getIndicatedAirSpeed()/100
+    HUD_AoA:set(sensor_data.getAngleOfAttack()/test)
+    --if HUD_AoA < -0.5 or HUD_AoA > 0.5 then
+      --  HUD_AoA = 0
+    --end 
     -- HUD_FD_y:set(current_aoa)
 end

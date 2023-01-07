@@ -33,6 +33,7 @@ local TealColor 			= {0, 255, 255, 255}--RGBA
 local HUDScreen             = {255,0,255,255}
 local HUD_ladder_color      = {210,150,230,255}
 
+AOA_SCALE           = MakeMaterial(HUD_IND_TEX_PATH.."Energy_Cue.dds", GreenColor)
 HUD_CLIP            = MakeMaterial(HUD_IND_TEX_PATH.."SCREEN_clip.tga", HUDScreen)
 HUD_FPV             = MakeMaterial(HUD_IND_TEX_PATH.."vector.dds", GreenColor)
 HUD_FPV_REAL        = MakeMaterial(HUD_IND_TEX_PATH.."rombo.dds", GreenColor)
@@ -45,12 +46,14 @@ HUD_ALTCIRCLE       = MakeMaterial(HUD_IND_TEX_PATH.."altitud.dds", GreenColor)
 HUD_ALT_ROT         = MakeMaterial(HUD_IND_TEX_PATH.."alt_rot.dds", GreenColor)
 HUD_M               = MakeMaterial(HUD_IND_TEX_PATH.."MText.tga", GreenColor)
 HUD_VV              = MakeMaterial(HUD_IND_TEX_PATH.."velocidad_vertical.dds", GreenColor)
+HUD_AOA             = MakeMaterial(HUD_IND_TEX_PATH.."flecha_velocidad_vertical.dds", GreenColor)
 HUD_VV_arr          = MakeMaterial(HUD_IND_TEX_PATH.."flecha_velocidad_vertical.dds", GreenColor)
 HUD_VV_arr_inverted = MakeMaterial(HUD_IND_TEX_PATH.."flecha_velocidad_vertical_inverted.dds", GreenColor)
 HUD_ROSA_RUMBOS     = MakeMaterial(HUD_IND_TEX_PATH.."rumbos.dds", GreenColor)
 HUD_ROSA_RUMBOS_2   = MakeMaterial(HUD_IND_TEX_PATH.."rumbos.dds", GreenColor)
 HUD_ACCELEROMETER   = MakeMaterial(HUD_IND_TEX_PATH.."flechas_horizonte.dds", GreenColor)
 HUD_GEAR            = MakeMaterial(HUD_IND_TEX_PATH.."gear.dds", GreenColor)
+
 
 
 
