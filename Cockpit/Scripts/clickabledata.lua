@@ -337,6 +337,69 @@ elements["HUD01"]					= default_button("HUD BUTTON 1", devices.HUD, device_comma
 elements["HUD03"]					= default_button("HUD BUTTON 3", devices.HUD, device_commands.HUD03 , nil,nil,nil)
 elements["HUD04"]					= default_button("HUD BUTTON 4", devices.HUD, device_commands.HUD04 , nil,nil,nil)
 elements["HUD05"]					= default_button("HUD BUTTON 5", devices.HUD, device_commands.HUD05 , nil,nil,nil)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------MFDL------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+elements["MFDL-001"]					= default_button("MFD BUTTON 1", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-002"]					= default_button("MFD BUTTON 2", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-003"]					= default_button("MFD BUTTON 3", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-004"]					= default_button("MFD BUTTON 4", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-005"]					= default_button("MFD BUTTON 5", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-006"]					= default_button("MFD BUTTON 6", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-007"]					= default_button("MFD BUTTON 7", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-008"]					= default_button("MFD BUTTON 8", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-009"]					= default_button("MFD BUTTON 9", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-010"]					= default_button("MFD BUTTON 10", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-011"]					= default_button("MFD BUTTON 11", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-012"]					= default_button("MFD BUTTON 12", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-013"]					= default_button("MFD BUTTON 13", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-014"]					= default_button("MFD BUTTON 14", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-015"]					= default_button("MFD BUTTON 15", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-016"]					= default_button("MFD BUTTON 16", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+elements["MFDL-017"]					= default_button("MFD BUTTON 17", devices.MFDL, device_commands.HUD05 , nil,nil,nil)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------MFDR------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+elements["MFDR-001"]					= default_button("MFD BUTTON 1", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-002"]					= default_button("MFD BUTTON 2", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-003"]					= default_button("MFD BUTTON 3", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-004"]					= default_button("MFD BUTTON 4", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-005"]					= default_button("MFD BUTTON 5", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-006"]					= default_button("MFD BUTTON 6", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-007"]					= default_button("MFD BUTTON 7", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-008"]					= default_button("MFD BUTTON 8", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-009"]					= default_button("MFD BUTTON 9", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-010"]					= default_button("MFD BUTTON 10", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-011"]					= default_button("MFD BUTTON 11", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-012"]					= default_button("MFD BUTTON 12", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-013"]					= default_button("MFD BUTTON 13", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-014"]					= default_button("MFD BUTTON 14", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-015"]					= default_button("MFD BUTTON 15", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-016"]					= default_button("MFD BUTTON 16", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+elements["MFDR-017"]					= default_button("MFD BUTTON 17", devices.MFDR, device_commands.HUD05 , nil,nil,nil)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------MFDC------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+elements["MFDC-001"]					= default_button("MFD BUTTON 1", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-002"]					= default_button("MFD BUTTON 2", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-003"]					= default_button("MFD BUTTON 3", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-004"]					= default_button("MFD BUTTON 4", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-005"]					= default_button("MFD BUTTON 5", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-006"]					= default_button("MFD BUTTON 6", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-007"]					= default_button("MFD BUTTON 7", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-008"]					= default_button("MFD BUTTON 8", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-009"]					= default_button("MFD BUTTON 9", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-010"]					= default_button("MFD BUTTON 10", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-011"]					= default_button("MFD BUTTON 11", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-012"]					= default_button("MFD BUTTON 12", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-013"]					= default_button("MFD BUTTON 13", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-014"]					= default_button("MFD BUTTON 14", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-015"]					= default_button("MFD BUTTON 15", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-016"]					= default_button("MFD BUTTON 16", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+elements["MFDC-017"]					= default_button("MFD BUTTON 17", devices.MFDC, device_commands.HUD05 , nil,nil,nil)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- elements["LOW_HT"] 				= default_axis_limited("Low Height Advisory",  devices.UTILITES, device_commands.LOW_HT,743,0,0.1334,false,false,0.5)
 for i,o in pairs(elements) do
