@@ -26,8 +26,8 @@ local TealColor 	= {0, 255, 255, 255}   --RGBA
 
 FD_MATERIAL_B = MakeMaterial(MFDL_IND_TEX_PATH.."MFD_VDI_BACK.dds", WhiteColor)
 
-default_mfdl_x = 0
-default_mfdl_y = 0
+default_mfdl_x = 20000
+default_mfdl_y = 20000
 
 function mfdl_vert_gen(width, height)
 	return {
