@@ -5,16 +5,16 @@ indicator_type = indicator_types.COMMON
 purposes       = {render_purpose.GENERAL, render_purpose.MFD_ONLY_VIEW}
 
 BASE = 1
---AUTOCUE = 2
+AUTOCUE = 2
 
 page_subsets = {
 	[BASE]      = LockOn_Options.script_path.."MFD-L/Indicator/base_page.lua",
-	--[AUTOCUE]      = LockOn_Options.script_path.."MFD-L/Indicator/base_page.lua",
+	[AUTOCUE]      = LockOn_Options.script_path.."MFD-L/Indicator/auto_cue.lua",
 }
 
 pages = {
 	{BASE,},
-	--{AUTOCUE,},
+	{AUTOCUE,},
 }
 
 init_pageID = 1
