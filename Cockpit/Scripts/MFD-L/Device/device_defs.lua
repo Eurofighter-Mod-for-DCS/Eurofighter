@@ -1,7 +1,7 @@
 dofile(LockOn_Options.common_script_path.."elements_defs.lua")
 dofile(LockOn_Options.script_path.."materials.lua")
 
-MFDL_IND_TEX_PATH = LockOn_Options.script_path.."../Textures/ADI/"
+MFDL_IND_TEX_PATH = LockOn_Options.script_path.."../Textures/MFD/"
 
 SetScale(FOV)
 
@@ -23,11 +23,13 @@ local YellowColor = {255, 255, 0, 255}   --RGBA
 local OrangeColor = {255, 102, 0, 255}   --RGBA
 local RedColor 		= {255, 0, 0, 255}     --RGBA
 local TealColor 	= {0, 255, 255, 255}   --RGBA
+local BlueColor     = {0, 5, 255, 255}
 
-FD_MATERIAL_B = MakeMaterial(MFDL_IND_TEX_PATH.."MFD_VDI_BACK.dds", WhiteColor)
-
-default_mfdl_x = 0
-default_mfdl_y = 0
+FD_MATERIAL_B = MakeMaterial(MFDL_IND_TEX_PATH.."test.dds", WhiteColor)
+STOREPLANE = MakeMaterial(MFDL_IND_TEX_PATH.."Store test1.dds", WhiteColor)
+STORETEST = MakeMaterial(MFDL_IND_TEX_PATH.."Store test1.dds", BlueColor)
+default_mfdl_x = 20000
+default_mfdl_y = 20000
 
 function mfdl_vert_gen(width, height)
 	return {

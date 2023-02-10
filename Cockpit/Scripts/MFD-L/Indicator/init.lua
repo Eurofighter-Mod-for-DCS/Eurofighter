@@ -5,16 +5,19 @@ indicator_type = indicator_types.COMMON
 purposes       = {render_purpose.GENERAL, render_purpose.MFD_ONLY_VIEW}
 
 BASE = 1
+ACUE = 2
 
 page_subsets = {
 	[BASE]      = LockOn_Options.script_path.."MFD-L/Indicator/base_page.lua",
+	[ACUE]      = LockOn_Options.script_path.."MFD-L/Indicator/acue_page.lua",
 }
 
 pages = {
 	{BASE,},
+	{ACUE,},
 }
 
-init_pageID = 1
+init_pageID = 2
 
 update_screenspace_diplacement(SelfWidth/SelfHeight, false)
 
