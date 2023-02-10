@@ -11,6 +11,8 @@ version		 = "1.0.8",
 state		 = "installed",
 info		 = _("The Eurofighter Typhoon is a twin-engine, canard–delta wing, multirole fighter. The Typhoon was designed originally as an air superiority fighter and is manufactured by a consortium of Airbus, BAE Systems and Leonardo that conducts the majority of the project through a joint holding company, Eurofighter Jagdflugzeug GmbH. NATO Eurofighter and Tornado Management Agency manages the project and is the prime customer."),
 
+binaries     = { 'avSimplest' },
+
 InputProfiles =
 {
     ["Eurofighter"] = current_mod_path .. '/Input',
@@ -61,8 +63,7 @@ dofile(current_mod_path.."/Views.lua")
 make_view_settings('Eurofighter', ViewSettings, SnapViews)
 
 mount_vfs_sound_path (current_mod_path.."/Sounds/")
-----------------------------------------------------------------------------------------c
-make_flyable('Eurofighter', current_mod_path..'/Cockpit/Scripts/', {nil,old=4}, current_mod_path..'/comm.lua')
-----------------------------------------------------------------------------------------
-make_flyable('Eurofighter', current_mod_path..'/Cockpit/Scripts/', {nil,old=4}, current_mod_path..'/comm.lua')
+
+make_flyable('Eurofighter', current_mod_path..'/Cockpit/Scripts/', nil, current_mod_path..'/comm.lua')
+
 plugin_done()

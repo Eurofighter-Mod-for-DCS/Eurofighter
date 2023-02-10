@@ -496,12 +496,11 @@ CanopyGeometry 	= {
 },
 
 Sensors = {
-	detection_range_max		 = 600,               
-	radar_can_see_ground 	 = true,  
-	RADAR = "AN/APG-73",
-	--RADAR = "Byelka Radar", 
-	IRST = "OLS-27",
-	RWR 			= "Abstract RWR"--F15
+	detection_range_max  = 600,               
+	radar_can_see_ground = true,  
+	RADAR                = "AN/APG-73",
+	IRST                 = "OLS-27",
+	RWR 			     = "Abstract RWR"--F15
 },
 Countermeasures = {
 	ECM 			= "AN/ALQ-135"--F15
